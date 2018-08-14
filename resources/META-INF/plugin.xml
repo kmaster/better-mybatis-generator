@@ -1,0 +1,35 @@
+<idea-plugin>
+  <id>cn.kt.better.mybatis.generator.id</id>
+  <name>better-mybatis-generator</name>
+  <version>1.0</version>
+  <vendor email="396367775@qq.com" url="https://github.com/kmaster/better-mybatis-generator.git">kang tian</vendor>
+
+  <description><![CDATA[
+      mybatis代码生成插件 生成dao、example、domain、xml文件
+    ]]></description>
+
+  <change-notes><![CDATA[
+     first init
+     根据设置的配置生成mybatis相关文件
+     配置可以设置默认配置，已经使用过的表优先使用已存在的配置
+     首次使用此功能需要输入当前数据库的账号密码
+    ]]>
+  </change-notes>
+
+  <idea-version since-build="145.0"/>
+
+  <depends optional="true">com.intellij.database</depends>
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceInterface="cn.kt.setting.PersistentConfig" serviceImplementation="cn.kt.setting.PersistentConfig"/>
+    <projectService serviceInterface="cn.kt.setting.DataConfig" serviceImplementation="cn.kt.setting.DataConfig"/>
+    <projectConfigurable groupId="tools" displayName="Mybatis generator plugin" id="gene.id" instance="cn.kt.setting.SettingConfigurable" />
+  </extensions>
+
+  <actions>
+    <action id="mabatis-generate-action" class="cn.kt.action.MainAction" text="mabatis-generate" description="mybatis 自动生成插件">
+      <add-to-group group-id="DatabaseViewPopupMenu" anchor="last"/>
+    </action>
+
+  </actions>
+
+</idea-plugin>
