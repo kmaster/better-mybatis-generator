@@ -1,6 +1,4 @@
-# better-mybatis-generator
-
-idea插件
+better-mybatis-generator idea插件
 ====
 在数据库管理插件datagrip中，直接生产mybatis相关的model，dao，xml等文件。<br>
 
