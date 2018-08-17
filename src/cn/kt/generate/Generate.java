@@ -104,7 +104,7 @@ public class Generate {
             try {
                 myBatisGenerator.generate(new GeneratorCallback(), contexts, fullyqualifiedTables);
             } catch (Exception e) {
-                Messages.showMessageDialog(e.getMessage(), "生成失败", Messages.getInformationIcon()
+                Messages.showMessageDialog(e.getMessage(), "Generate failure", Messages.getInformationIcon()
                 );
             }
             VirtualFile baseDir = project.getBaseDir();

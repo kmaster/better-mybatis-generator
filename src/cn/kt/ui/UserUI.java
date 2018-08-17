@@ -46,7 +46,7 @@ public class UserUI extends JFrame {
         this.anActionEvent = anActionEvent;
         this.project = anActionEvent.getData(PlatformDataKeys.PROJECT);
         this.persistentConfig = PersistentConfig.getInstance(project);
-        setTitle("请设置当前数据库的账号密码");
+        setTitle("set username and password");
         setPreferredSize(new Dimension(400, 180));//设置大小
         setLocation(550, 350);
         pack();
@@ -66,9 +66,9 @@ public class UserUI extends JFrame {
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
         panel2.setBorder(new EmptyBorder(2, 2, 2, 2));
 
-        panel1.add(new JLabel("账    号:"));
+        panel1.add(new JLabel("username:"));
         panel1.add(usernameField);
-        panel2.add(new JLabel("密    码:"));
+        panel2.add(new JLabel("password:"));
         panel2.add(passwordField);
 
         filedPanel.add(panel1);
@@ -113,7 +113,7 @@ public class UserUI extends JFrame {
                 conn = DriverManager.getConnection(address, usernameField.getText(), passwordField.getText());
 
             } catch (Exception ex) {
-                Messages.showMessageDialog(project, "用户名或密码错误", "数据库连接测试", Messages.getInformationIcon());
+                Messages.showMessageDialog(project, "User name or password error", "Testing database connection ", Messages.getInformationIcon());
                 new UserUI(address, anActionEvent);
                 return;
             } finally {

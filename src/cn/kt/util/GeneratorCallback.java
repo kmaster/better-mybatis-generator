@@ -29,7 +29,7 @@ public class GeneratorCallback implements ProgressCallback {
 
     @Override
     public void done() {
-        Messages.showMessageDialog("代码生成完成", "生成进度", Messages.getInformationIcon());
+        Messages.showMessageDialog("Generate finish", "Generate progress", Messages.getInformationIcon());
     }
 
     @Override

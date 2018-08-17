@@ -23,12 +23,12 @@ public class MainAction extends AnAction {
     public void actionPerformed(AnActionEvent e) {
         PsiElement[] psiElements = e.getData(LangDataKeys.PSI_ELEMENT_ARRAY);
         if (psiElements == null || psiElements.length == 0) {
-            Messages.showMessageDialog("请仅选择一种或多种表，不能选择数据库或其他", "错误提示", Messages.getInformationIcon());
+            Messages.showMessageDialog("Please select one or more tables", "Notice", Messages.getInformationIcon());
             return;
         }
         for (PsiElement psiElement : psiElements) {
             if (!(psiElement instanceof DbTable)) {
-                Messages.showMessageDialog("请仅选择一种或多种表，不能选择数据库或其他", "错误提示", Messages.getInformationIcon());
+                Messages.showMessageDialog("Please select one or more tables", "Notice", Messages.getInformationIcon());
                 return;
             }
         }

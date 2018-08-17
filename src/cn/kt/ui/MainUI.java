@@ -86,7 +86,7 @@ public class MainUI extends JFrame {
         this.persistentConfig = PersistentConfig.getInstance(project);
         this.psiElements = anActionEvent.getData(LangDataKeys.PSI_ELEMENT_ARRAY);
 
-        setTitle("mybatis生成器");
+        setTitle("mybatis generate tool");
         setPreferredSize(new Dimension(1200, 700));//设置大小
         setLocation(120, 100);
         pack();
