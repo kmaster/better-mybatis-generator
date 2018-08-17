@@ -6,12 +6,13 @@
 
     <description>
         <![CDATA[
-         function：use in datagrip，generate mybatis files (include:dao、example、domain、xml) for one or more tables;</br>
+         function：use in idea database tool，right click table(one or more) to generate mybatis files (include:dao、example、domain、xml)</br>
         </br>
-        step1: connect database.</br>
-        step2：select one or more tables,right click and select mybatis generate.</br>
-        step3：provide account password for the first time.</br>
-        step4：click ok，check your files.</br>
+        step1: connect database in idea.</br>
+        step2：select one or more tables,right click and select "mybatis generate" to open generatoe main UI.</br>
+        step3：check configuration,click ok</br>
+        step4：provide account and password for the first time. </br>
+        step4：generate work finish,check files and it can be use.</br>
         </br>
         setting: "Tools -> MyBatis Log Plugin" set custom default configuration，If not, use the program default configuration.</br>
         </br>
