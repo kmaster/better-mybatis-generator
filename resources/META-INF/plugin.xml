@@ -1,31 +1,36 @@
 <idea-plugin>
     <id>cn.kt.better.mybatis.generator.id</id>
     <name>better-mybatis-generator</name>
-    <version>1.1</version>
+    <version>1.2</version>
     <vendor email="396367775@qq.com" url="https://github.com/kmaster/better-mybatis-generator">kang tian</vendor>
 
     <description>
-        function：use in datagrip，generate mybatis files (include:dao、example、domain、xml) for one or more tables;
+        <![CDATA[
+         function：use in datagrip，generate mybatis files (include:dao、example、domain、xml) for one or more tables;</br>
+        </br>
+        step1: connect database.</br>
+        step2：select one or more tables,right click and select mybatis generate.</br>
+        step3：provide account password for the first time.</br>
+        step4：click ok，check your files.</br>
+        </br>
+        setting: "Tools -> MyBatis Log Plugin" set custom default configuration，If not, use the program default configuration.</br>
+        </br>
+        more tutorial please visit <a href="https://github.com/kmaster/better-mybatis-generator/blob/master/README.md">here </a></br>
+        ]]>
 
-        step1: connect database.
-        step2：select one or more tables,right click and select mybatis generate.
-        step3：provide account password for the first time.
-        step4：click ok，check your files.
-
-        setting: "Tools -> MyBatis Log Plugin" set custom default configuration，If not, use the program default configuration.
-
-        more tutorial please visit here：   https://github.com/kmaster/better-mybatis-generator/blob/master/README.md
     </description>
 
     <change-notes>
+        <![CDATA[
+        1.1、1.2</br>
+        change Alert Message to English.Optimize the description.</br>
+        </br>
+        1.0</br>
+        Initial release of the plugin.</br>
+        provide mybatis Generate function according to configuration.</br>
+        provide default configuration in setting.</br>
 
-        1.1
-        change Message to English.
-
-        1.0
-        the first time commit.
-        provide mybatis Generate function according to configuration.
-        provide default configuration in setting.
+        ]]>
     </change-notes>
 
     <idea-version since-build="145.0"/>
