@@ -5,7 +5,7 @@ Use in idea database tool，right click table(one or more) to generate mybatis f
 Plugin Installation：
 -------
 - Using IDE built-in plugin system on Windows:
-  - <kbd>File</kbd> > <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Browse repositories...</kbd> > <kbd>Search for "sql generator"</kbd> > <kbd>Install Plugin</kbd>
+  - <kbd>File</kbd> > <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Browse repositories...</kbd> > <kbd>Search for "better-mybatis-generator"</kbd> > <kbd>Install Plugin</kbd>
 - Manually:
   - Download the [latest release](https://plugins.jetbrains.com/plugin/11021-better-mybatis-generator) and install it manually using <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Install plugin from disk...</kbd>
 
@@ -19,7 +19,7 @@ Using sample screenshots：
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/3.png)<br>
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/4.png)<br>
 
-#3、Select one or more tables,right click and select "mybatis generate" to open generatoe main UI. | 在需要生成代码的表上右键，选择mybatis generate，打开预览界面。<br>
+#3、Select one or more tables,right click and select <kbd>mybatis generate</kbd> to open generatoe main UI. | 在需要生成代码的表上右键，选择mybatis generate，打开预览界面。<br>
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/5.png)<br>
 
 #4、Check configuration in main ui,click ok | 设置确认完成后，点击ok，开始生产代码。<br>
