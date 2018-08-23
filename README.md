@@ -1,11 +1,13 @@
 better-mybatis-generator idea插件
 ====
-功能：在idea中内置的数据库管理插件datagrip中，直接生成mybatis相关的model，dao，xml等文件。<br>
+Use in idea database tool，right click table(one or more) to generate mybatis files (include:dao、example、domain、xml)<br>
 
-下载途径：
+Plugin Installation：
 -------
-#1、在idea插件仓库中搜索better-mybatis-generator 点击install，安装完成后重启即可<br>
-#2、直接下载本仓库中的better-mybatis-generator.zip，在idea中选择从硬盘安装，选择此zip包安装，完成后重启即可。<br>
+- Using IDE built-in plugin system on Windows:
+  - <kbd>File</kbd> > <kbd>Settings</kbd> > <kbd>Plugins</kbd> > <kbd>Browse repositories...</kbd> > <kbd>Search for "sql generator"</kbd> > <kbd>Install Plugin</kbd>
+- Manually:
+  - Download the [latest release](https://plugins.jetbrains.com/plugin/11021-better-mybatis-generator) and install it manually using <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Install plugin from disk...</kbd>
 
 使用方法：
 -------
@@ -28,3 +30,5 @@ better-mybatis-generator idea插件
 
 #6、检查生成的代码文件<br>
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/8.png)<br>
+
+
