@@ -45,8 +45,8 @@ public class MainUI extends JFrame {
     private JPanel contentPane = new JBPanel<>();
     private JButton buttonOK = new JButton("ok");
     private JButton buttonCancel = new JButton("cancle");
-    private JButton selectConfigBtn = new JButton("选择配置");
-    private JButton deleteConfigBtn = new JButton("删除配置");
+    private JButton selectConfigBtn = new JButton("SELECT");
+    private JButton deleteConfigBtn = new JButton("DELETE");
 
 
     private JTextField tableNameField = new JTextField(10);
@@ -64,21 +64,21 @@ public class MainUI extends JFrame {
     private JTextField modelMvnField = new JBTextField(15);
     private JTextField daoMvnField = new JBTextField(15);
     private JTextField xmlMvnField = new JBTextField(15);
-    private JButton setProjectBtn = new JButton("设置统一项目路径");
+    private JButton setProjectBtn = new JButton("Set-Project-Path");
 
-    private JCheckBox offsetLimitBox = new JCheckBox("分页");
-    private JCheckBox commentBox = new JCheckBox("生成实体注释（来自表）");
-    private JCheckBox overrideXMLBox = new JCheckBox("覆盖原xml");
-    private JCheckBox needToStringHashcodeEqualsBox = new JCheckBox("生成toString/hashCode/equals方法");
-    private JCheckBox useSchemaPrefixBox = new JCheckBox("使用Schema前缀");
-    private JCheckBox needForUpdateBox = new JCheckBox("select 增加ForUpdate");
-    private JCheckBox annotationDAOBox = new JCheckBox("DAO使用 @Repository 注解");
-    private JCheckBox useDAOExtendStyleBox = new JCheckBox("DAO方法抽出到公共父接口");
+    private JCheckBox offsetLimitBox = new JCheckBox("Page(分页)");
+    private JCheckBox commentBox = new JCheckBox("comment(实体注释)");
+    private JCheckBox overrideXMLBox = new JCheckBox("Overwrite-Xml");
+    private JCheckBox needToStringHashcodeEqualsBox = new JCheckBox("toString/hashCode/equals");
+    private JCheckBox useSchemaPrefixBox = new JCheckBox("Use-Schema(使用Schema前缀)");
+    private JCheckBox needForUpdateBox = new JCheckBox("Add-ForUpdate(select增加ForUpdate)");
+    private JCheckBox annotationDAOBox = new JCheckBox("Repository-Annotation(Repository注解)");
+    private JCheckBox useDAOExtendStyleBox = new JCheckBox("Parent-Interface(公共父接口)");
     private JCheckBox jsr310SupportBox = new JCheckBox("JSR310: Date and Time API");
-    private JCheckBox annotationBox = new JCheckBox("生成JPA注解");
-    private JCheckBox useActualColumnNamesBox = new JCheckBox("使用实际的列名");
-    private JCheckBox useTableNameAliasBox = new JCheckBox("启用as别名查询");
-    private JCheckBox useExampleBox = new JCheckBox("使用Example");
+    private JCheckBox annotationBox = new JCheckBox("JPA-Annotation(JPA注解)");
+    private JCheckBox useActualColumnNamesBox = new JCheckBox("Actual-Column(实际的列名)");
+    private JCheckBox useTableNameAliasBox = new JCheckBox("Use-Alias(启用别名查询)");
+    private JCheckBox useExampleBox = new JCheckBox("Use-Example");
 
     public MainUI(AnActionEvent anActionEvent) throws HeadlessException {
         this.anActionEvent = anActionEvent;
