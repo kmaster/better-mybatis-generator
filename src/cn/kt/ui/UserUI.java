@@ -1,9 +1,13 @@
 package cn.kt.ui;
 
+import cn.kt.model.DbType;
 import cn.kt.model.User;
 import cn.kt.setting.PersistentConfig;
 import com.intellij.credentialStore.CredentialAttributes;
 import com.intellij.credentialStore.Credentials;
+import com.intellij.database.model.DatabaseSystem;
+import com.intellij.database.model.RawConnectionConfig;
+import com.intellij.database.psi.DbDataSource;
 import com.intellij.ide.passwordSafe.PasswordSafe;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -42,7 +46,7 @@ public class UserUI extends JFrame {
     public JTextField passwordField = new JBTextField(20);
 
 
-    public UserUI(String address, AnActionEvent anActionEvent) throws HeadlessException {
+    public UserUI(String driverClass,String address, AnActionEvent anActionEvent) throws HeadlessException {
         this.anActionEvent = anActionEvent;
         this.project = anActionEvent.getData(PlatformDataKeys.PROJECT);
         this.persistentConfig = PersistentConfig.getInstance(project);
@@ -83,7 +87,7 @@ public class UserUI extends JFrame {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK(address, persistentConfig, project);
+                onOK(driverClass,address, persistentConfig, project);
             }
         });
 
@@ -105,16 +109,21 @@ public class UserUI extends JFrame {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK(String address, PersistentConfig persistentConfig, Project project) {
+    private void onOK(String driverClass,String address, PersistentConfig persistentConfig, Project project) {
         try {
             Connection conn = null;
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                if(driverClass.contains("oracle")){
+                    Class.forName(DbType.Oracle.getDriverClass());
+                } else if (driverClass.contains("mysql")) {
+                    Class.forName(DbType.MySQL.getDriverClass());
+                }
+
                 conn = DriverManager.getConnection(address, usernameField.getText(), passwordField.getText());
 
             } catch (Exception ex) {
                 Messages.showMessageDialog(project, "User name or password error", "Testing database connection ", Messages.getInformationIcon());
-                new UserUI(address, anActionEvent);
+                new UserUI(driverClass,address, anActionEvent);
                 return;
             } finally {
                 if (conn != null) {
@@ -122,7 +131,6 @@ public class UserUI extends JFrame {
                 }
                 dispose();
             }
-
 
             Map<String, User> users = persistentConfig.getUsers();
             if (users == null) {

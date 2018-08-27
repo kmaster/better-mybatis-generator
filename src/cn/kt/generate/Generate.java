@@ -39,6 +39,7 @@ public class Generate {
     private Project project;
     private PersistentConfig persistentConfig;//持久化的配置
     private Config config;//界面默认配置
+    private String username;
 
     public Generate(Config config) {
         this.config = config;
@@ -167,7 +168,6 @@ public class Generate {
 
     }
 
-
     /**
      * 生成数据库连接配置
      *
@@ -188,7 +188,8 @@ public class Generate {
         Map<String, User> users = persistentConfig.getUsers();
         if (users != null && users.containsKey(url)) {
             User user = users.get(url);
-            String username = user.getUsername();
+
+            username = user.getUsername();
             CredentialAttributes attributes_get = new CredentialAttributes("better-mybatis-generator-"+url, username, this.getClass(), false);
             String password = PasswordSafe.getInstance().getPassword(attributes_get);
 
@@ -196,7 +197,7 @@ public class Generate {
             jdbcConfig.setPassword(password);
             return jdbcConfig;
         } else {
-            UserUI userUI = new UserUI(url, anActionEvent);
+            UserUI userUI = new UserUI(driverClass,url, anActionEvent);
             return null;
         }
 
@@ -213,18 +214,28 @@ public class Generate {
         DatabaseSystem delegate = ((DbDataSource) psiElement.getParent().getParent()).getDelegate();
         RawConnectionConfig connectionConfig = delegate.getConnectionConfig();
 
-        String databaseProductName = delegate.getDatabaseProductName();
+        String productName = delegate.getDatabaseProductName();
         String driverClass = connectionConfig.getDriverClass();
-
-        String tableName = config.getTableName();
+        String url = connectionConfig.getUrl();
 
         TableConfiguration tableConfig = new TableConfiguration(context);
-        tableConfig.setTableName(tableName);
+        tableConfig.setTableName(config.getTableName());
         tableConfig.setDomainObjectName(config.getModelName());
 
-        String connectionName = ((DbDataSource) psiElement.getParent().getParent()).getDelegate().getConnectionConfig().getName();
-        String[] name_split = connectionName.split("@");
-        String schema = name_split[0];
+        String schema;
+        if (productName.equals(DbType.MySQL.name())) {
+            String[] name_split = url.split("/");
+            schema = name_split[name_split.length - 1];
+            tableConfig.setSchema(schema);
+        } else if (productName.equals(DbType.Oracle.name())) {
+            String[] name_split = url.split(":");
+            schema = name_split[name_split.length - 1];
+            tableConfig.setCatalog(schema);
+        } else {
+            String[] name_split = url.split("/");
+            schema = name_split[name_split.length - 1];
+            tableConfig.setCatalog(schema);
+        }
 
         if (!config.isUseExample()) {
             tableConfig.setUpdateByExampleStatementEnabled(false);
@@ -233,11 +244,11 @@ public class Generate {
             tableConfig.setSelectByExampleStatementEnabled(false);
         }
         if (config.isUseSchemaPrefix()) {
-            if (DbType.MySQL.name().equals(databaseProductName)) {
+            if (DbType.MySQL.name().equals(productName)) {
                 tableConfig.setSchema(schema);
-            } else if (DbType.Oracle.name().equals(databaseProductName)) {
+            } else if (DbType.Oracle.name().equals(productName)) {
                 //Oracle的schema为用户名，如果连接用户拥有dba等高级权限，若不设schema，会导致把其他用户下同名的表也生成一遍导致mapper中代码重复
-                tableConfig.setSchema(schema);
+                tableConfig.setSchema(username);
             } else {
                 tableConfig.setCatalog(schema);
             }
@@ -248,8 +259,8 @@ public class Generate {
         }
 
         if (!StringUtils.isEmpty(config.getPrimaryKey())) {
-            String dbType = databaseProductName;
-            if (DbType.MySQL.name().equals(databaseProductName)) {
+            String dbType = productName;
+            if (DbType.MySQL.name().equals(productName)) {
                 dbType = "JDBC";
                 //dbType为JDBC，且配置中开启useGeneratedKeys时，Mybatis会使用Jdbc3KeyGenerator,
                 //使用该KeyGenerator的好处就是直接在一次INSERT 语句内，通过resultSet获取得到 生成的主键值，

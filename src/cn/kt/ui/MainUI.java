@@ -98,7 +98,10 @@ public class MainUI extends JFrame {
         TableInfo tableInfo = new TableInfo((DbTable) psiElement);
         String tableName = tableInfo.getTableName();
         String modelName = StringUtils.dbStringToCamelStyle(tableName);
-        String primaryKey = tableInfo.getPrimaryKeys().get(0);
+        String primaryKey = "";
+        if(tableInfo.getPrimaryKeys().size()>0){
+            primaryKey = tableInfo.getPrimaryKeys().get(0);
+        }
         String projectFolder = project.getBasePath();
 
         initConfigMap = persistentConfig.getInitConfig();
