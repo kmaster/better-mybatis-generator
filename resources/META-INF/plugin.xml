@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cn.kt.better.mybatis.generator.id</id>
     <name>better-mybatis-generator</name>
-    <version>1.3</version>
+    <version>1.4</version>
     <vendor email="396367775@qq.com" url="https://github.com/kmaster/better-mybatis-generator">kang tian</vendor>
 
     <description>
@@ -9,12 +9,23 @@
    <ul>
         <li>Use in idea database tool，right click table(one or more) to generate mybatis files (include:dao、example、domain、xml)</li>
         <li>Step1: Connecting to Your Database: <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>.</li>
-        <li>Step2: Select one or more tables,<kbd>Right Click</kbd> and select <kbd>mybatis generate</kbd> to open generator main UI.</li>
+        <li>Step2: Select one or more tables,Right Click and select <kbd>mybatis generate</kbd> to open generator main UI.</li>
         <li>Step3: Check configuration in main ui,click <kbd>ok</kbd>.</li>
         <li>Step4: Provide account and password for the first time.</li>
         <li>Step5: Generate work finish,check files and it can be use.</li>
    <li>Setting: <kbd>Tools</kbd> > <kbd>MyBatis generator Plugin</kbd> set custom default configuration，If not, use the program default configuration.</li>
    <li>More tutorial please visit <a href="https://github.com/kmaster/better-mybatis-generator/blob/master/README.md">here </a></li>
+   </ul>
+
+      <ul>
+        <li>在idea的database工具中使用，右击选择一张或多张表生成mybatis相关的代码</li>
+        <li>Step1: 连接Database: <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>。</li>
+        <li>Step2: 选择表（一或多张），右击选择功能 <kbd>mybatis generate</kbd> 打开主页面。</li>
+        <li>Step3:检查配置无误后点击 <kbd>ok</kbd>。</li>
+        <li>Step4: 首次使用时请提供账号密码。</li>
+        <li>Step5: 生成完成，检查、使用代码。</li>
+   <li>Setting: <kbd>Tools</kbd> > <kbd>MyBatis generator Plugin</kbd> 此处设置默认配置，未设置则使用程序默认配置。</li>
+   <li>更多的说明和使用截图： <a href="https://github.com/kmaster/better-mybatis-generator/blob/master/README.md">使用示例</a></li>
    </ul>
     ]]>
 
@@ -23,11 +34,11 @@
     <change-notes>
     <![CDATA[
    <ul>
-    <li>v1.3<br/>
-        Reduced version requirements, Change Options description to English.
+    <li>v1.4<br/>
+        Fixed errors in oracle connection failures and code generation failures.
     </li>
-    <li>v1.2<br/>
-        Change Alert Message to English.
+    <li>v1.3<br/>
+        Reduced version requirements, Change Message and Options description to English.
     </li>
     <li>v1.0<br/>
         Initial release of the plugin.<br/>
