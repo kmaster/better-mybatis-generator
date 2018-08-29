@@ -7,7 +7,7 @@
     <description>
     <![CDATA[
    <ul>
-        <li>Use in idea database tool，right click table(one or more) to generate mybatis files (include:dao、example、domain、xml)</li>
+        <li>Use in idea database tool，right click table(one or more) to generate mybatis files (include:dao、example、domain、xml).Currently supported databases: Mysql, Oracle. To be verified: Mysql 8, Postgre SQL and SQL Server</li>
         <li>Step1: Connecting to Your Database: <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>.</li>
         <li>Step2: Select one or more tables,Right Click and select <kbd>mybatis generate</kbd> to open generator main UI.</li>
         <li>Step3: Check configuration in main ui,click <kbd>ok</kbd>.</li>
@@ -18,7 +18,7 @@
    </ul>
 
       <ul>
-        <li>在idea的database工具中使用，右击选择一张或多张表生成mybatis相关的代码</li>
+        <li>在idea的database工具中使用，右击选择一张或多张表生成mybatis相关的代码。目前已支持的数据库：Mysql、Oracle。待验证：Mysql8、PostgreSQL与SQL Server </li>
         <li>Step1: 连接Database: <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>。</li>
         <li>Step2: 选择表（一或多张），右击选择功能 <kbd>mybatis generate</kbd> 打开主页面。</li>
         <li>Step3:检查配置无误后点击 <kbd>ok</kbd>。</li>
