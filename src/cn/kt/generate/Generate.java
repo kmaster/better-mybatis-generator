@@ -6,10 +6,9 @@ import cn.kt.model.DbType;
 import cn.kt.model.User;
 import cn.kt.setting.PersistentConfig;
 import cn.kt.ui.UserUI;
-import cn.kt.util.StringUtils;
 import cn.kt.util.GeneratorCallback;
+import cn.kt.util.StringUtils;
 import com.intellij.credentialStore.CredentialAttributes;
-import com.intellij.database.model.DatabaseSystem;
 import com.intellij.database.model.RawConnectionConfig;
 import com.intellij.database.psi.DbDataSource;
 import com.intellij.database.psi.DbTable;
@@ -40,6 +39,9 @@ public class Generate {
     private PersistentConfig persistentConfig;//持久化的配置
     private Config config;//界面默认配置
     private String username;
+    private String DatabaseType;//数据库类型
+    private String driverClass;//数据库类型
+    private String url;//数据库类型
 
     public Generate(Config config) {
         this.config = config;
@@ -47,6 +49,7 @@ public class Generate {
 
     /**
      * 自动生成的主逻辑
+     *
      * @param anActionEvent
      * @throws Exception
      */
@@ -58,8 +61,24 @@ public class Generate {
         saveConfig();//执行前 先保存一份当前配置
 
         PsiElement[] psiElements = anActionEvent.getData(LangDataKeys.PSI_ELEMENT_ARRAY);
+
         if (psiElements == null || psiElements.length == 0) {
             return;
+        }
+
+        RawConnectionConfig connectionConfig = ((DbDataSource) psiElements[0].getParent().getParent()).getConnectionConfig();
+        driverClass = connectionConfig.getDriverClass();
+        url = connectionConfig.getUrl();
+        if (driverClass.contains("mysql")) {
+            DatabaseType = "MySQL";
+        } else if (driverClass.contains("oracle")) {
+            DatabaseType = "Oracle";
+        } else if (driverClass.contains("postgresql")) {
+            DatabaseType = "PostgreSQL";
+        } else if (driverClass.contains("sqlserver")) {
+            DatabaseType = "SqlServer";
+        } else if (driverClass.contains("sqlite")) {
+            DatabaseType = "Sqlite";
         }
 
         for (PsiElement psiElement : psiElements) {
@@ -116,6 +135,7 @@ public class Generate {
 
     /**
      * 创建所需目录
+     *
      * @param config
      */
     private void createFolderForNeed(Config config) {
@@ -175,10 +195,6 @@ public class Generate {
      * @return
      */
     private JDBCConnectionConfiguration buildJdbcConfig(PsiElement psiElement) {
-        DatabaseSystem delegate = ((DbDataSource) psiElement.getParent().getParent()).getDelegate();
-        RawConnectionConfig connectionConfig = delegate.getConnectionConfig();
-        String url = connectionConfig.getUrl();
-        String driverClass = connectionConfig.getDriverClass();
 
         JDBCConnectionConfiguration jdbcConfig = new JDBCConnectionConfiguration();
         jdbcConfig.addProperty("nullCatalogMeansCurrent", "true");
@@ -190,14 +206,14 @@ public class Generate {
             User user = users.get(url);
 
             username = user.getUsername();
-            CredentialAttributes attributes_get = new CredentialAttributes("better-mybatis-generator-"+url, username, this.getClass(), false);
+            CredentialAttributes attributes_get = new CredentialAttributes("better-mybatis-generator-" + url, username, this.getClass(), false);
             String password = PasswordSafe.getInstance().getPassword(attributes_get);
 
             jdbcConfig.setUserId(username);
             jdbcConfig.setPassword(password);
             return jdbcConfig;
         } else {
-            UserUI userUI = new UserUI(driverClass,url, anActionEvent);
+            UserUI userUI = new UserUI(driverClass, url, anActionEvent);
             return null;
         }
 
@@ -211,23 +227,16 @@ public class Generate {
      * @return
      */
     private TableConfiguration buildTableConfig(PsiElement psiElement, Context context) {
-        DatabaseSystem delegate = ((DbDataSource) psiElement.getParent().getParent()).getDelegate();
-        RawConnectionConfig connectionConfig = delegate.getConnectionConfig();
-
-        String productName = delegate.getDatabaseProductName();
-        String driverClass = connectionConfig.getDriverClass();
-        String url = connectionConfig.getUrl();
-
         TableConfiguration tableConfig = new TableConfiguration(context);
         tableConfig.setTableName(config.getTableName());
         tableConfig.setDomainObjectName(config.getModelName());
 
         String schema;
-        if (productName.equals(DbType.MySQL.name())) {
+        if (DatabaseType.equals(DbType.MySQL.name())) {
             String[] name_split = url.split("/");
             schema = name_split[name_split.length - 1];
             tableConfig.setSchema(schema);
-        } else if (productName.equals(DbType.Oracle.name())) {
+        } else if (DatabaseType.equals(DbType.Oracle.name())) {
             String[] name_split = url.split(":");
             schema = name_split[name_split.length - 1];
             tableConfig.setCatalog(schema);
@@ -244,9 +253,9 @@ public class Generate {
             tableConfig.setSelectByExampleStatementEnabled(false);
         }
         if (config.isUseSchemaPrefix()) {
-            if (DbType.MySQL.name().equals(productName)) {
+            if (DbType.MySQL.name().equals(DatabaseType)) {
                 tableConfig.setSchema(schema);
-            } else if (DbType.Oracle.name().equals(productName)) {
+            } else if (DbType.Oracle.name().equals(DatabaseType)) {
                 //Oracle的schema为用户名，如果连接用户拥有dba等高级权限，若不设schema，会导致把其他用户下同名的表也生成一遍导致mapper中代码重复
                 tableConfig.setSchema(username);
             } else {
@@ -259,8 +268,8 @@ public class Generate {
         }
 
         if (!StringUtils.isEmpty(config.getPrimaryKey())) {
-            String dbType = productName;
-            if (DbType.MySQL.name().equals(productName)) {
+            String dbType = DatabaseType;
+            if (DbType.MySQL.name().equals(DatabaseType)) {
                 dbType = "JDBC";
                 //dbType为JDBC，且配置中开启useGeneratedKeys时，Mybatis会使用Jdbc3KeyGenerator,
                 //使用该KeyGenerator的好处就是直接在一次INSERT 语句内，通过resultSet获取得到 生成的主键值，
@@ -419,8 +428,7 @@ public class Generate {
      * @param context
      */
     private void addPluginConfiguration(PsiElement psiElement, Context context) {
-        DatabaseSystem delegate = ((DbDataSource) psiElement.getParent().getParent()).getDelegate();
-        String databaseProductName = delegate.getDatabaseProductName();
+
 
         //实体添加序列化
         PluginConfiguration serializablePlugin = new PluginConfiguration();
@@ -442,8 +450,8 @@ public class Generate {
 
         // limit/offset插件
         if (config.isOffsetLimit()) {
-            if (DbType.MySQL.name().equals(databaseProductName)
-                    || DbType.PostgreSQL.name().equals(databaseProductName)) {
+            if (DbType.MySQL.name().equals(DatabaseType)
+                    || DbType.PostgreSQL.name().equals(DatabaseType)) {
                 PluginConfiguration mySQLLimitPlugin = new PluginConfiguration();
                 mySQLLimitPlugin.addProperty("type", "cn.kt.MySQLLimitPlugin");
                 mySQLLimitPlugin.setConfigurationType("cn.kt.MySQLLimitPlugin");
@@ -460,8 +468,8 @@ public class Generate {
 
         //forUpdate 插件
         if (config.isNeedForUpdate()) {
-            if (DbType.MySQL.name().equals(databaseProductName)
-                    || DbType.PostgreSQL.name().equals(databaseProductName)) {
+            if (DbType.MySQL.name().equals(DatabaseType)
+                    || DbType.PostgreSQL.name().equals(DatabaseType)) {
                 PluginConfiguration mySQLForUpdatePlugin = new PluginConfiguration();
                 mySQLForUpdatePlugin.addProperty("type", "cn.kt.MySQLForUpdatePlugin");
                 mySQLForUpdatePlugin.setConfigurationType("cn.kt.MySQLForUpdatePlugin");
@@ -471,8 +479,8 @@ public class Generate {
 
         //repository 插件
         if (config.isAnnotationDAO()) {
-            if (DbType.MySQL.name().equals(databaseProductName)
-                    || DbType.PostgreSQL.name().equals(databaseProductName)) {
+            if (DbType.MySQL.name().equals(DatabaseType)
+                    || DbType.PostgreSQL.name().equals(DatabaseType)) {
                 PluginConfiguration repositoryPlugin = new PluginConfiguration();
                 repositoryPlugin.addProperty("type", "cn.kt.RepositoryPlugin");
                 repositoryPlugin.setConfigurationType("cn.kt.RepositoryPlugin");
@@ -481,8 +489,8 @@ public class Generate {
         }
 
         if (config.isUseDAOExtendStyle()) {//13
-            if (DbType.MySQL.name().equals(databaseProductName)
-                    || DbType.PostgreSQL.name().equals(databaseProductName)) {
+            if (DbType.MySQL.name().equals(DatabaseType)
+                    || DbType.PostgreSQL.name().equals(DatabaseType)) {
                 PluginConfiguration commonDAOInterfacePlugin = new PluginConfiguration();
                 commonDAOInterfacePlugin.addProperty("type", "cn.kt.CommonDAOInterfacePlugin");
                 commonDAOInterfacePlugin.setConfigurationType("cn.kt.CommonDAOInterfacePlugin");
@@ -494,6 +502,7 @@ public class Generate {
 
     /**
      * 获取xml文件路径 用以删除之前的xml
+     *
      * @param config
      * @return
      */

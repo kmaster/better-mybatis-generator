@@ -1,8 +1,8 @@
 package cn.kt.ui;
 
+import cn.kt.model.Config;
 import cn.kt.setting.PersistentConfig;
 import cn.kt.util.JTextFieldHintListener;
-import cn.kt.model.Config;
 import com.intellij.ide.util.PackageChooserDialog;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;

@@ -5,7 +5,7 @@
     <vendor email="396367775@qq.com" url="https://github.com/kmaster/better-mybatis-generator">kang tian</vendor>
 
     <description>
-    <![CDATA[
+        <![CDATA[
    <ul>
         <li>Use in idea database tool，right click table(one or more) to generate mybatis files (include:dao、example、domain、xml).Currently supported databases: Mysql, Oracle. To be verified: Mysql 8, Postgre SQL and SQL Server</li>
         <li>Step1: Connecting to Your Database: <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>.</li>
@@ -17,7 +17,7 @@
    <li>More tutorial please visit <a href="https://github.com/kmaster/better-mybatis-generator/blob/master/README.md">here </a></li>
    </ul>
 
-      <ul>
+   <ul>
         <li>在idea的database工具中使用，右击选择一张或多张表生成mybatis相关的代码。目前已支持的数据库：Mysql、Oracle。待验证：Mysql8、PostgreSQL与SQL Server </li>
         <li>Step1: 连接Database: <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>。</li>
         <li>Step2: 选择表（一或多张），右击选择功能 <kbd>mybatis generate</kbd> 打开主页面。</li>
@@ -32,18 +32,21 @@
     </description>
 
     <change-notes>
-    <![CDATA[
+        <![CDATA[
    <ul>
-    <li>v1.4<br/>
-        Fixed errors in oracle connection failures and code generation failures.
-    </li>
-    <li>v1.3<br/>
-        Reduced version requirements, Change Message and Options description to English.
-    </li>
-    <li>v1.0<br/>
-        Initial release of the plugin.<br/>
-        Provide mybatis Generate function according to configuration and default configuration in setting.
-    </li>
+       <li>v1.5<br/>
+            Support for the latest version.Optimize mysql8 database connection.
+        </li>
+        <li>v1.4<br/>
+            Fixed errors in oracle connection failures and code generation failures.
+        </li>
+        <li>v1.3<br/>
+            Reduced version requirements, Change Message and Options description to English.
+        </li>
+        <li>v1.0<br/>
+            Initial release of the plugin.<br/>
+            Provide mybatis Generate function according to configuration and default configuration in setting.
+        </li>
    </ul>
     ]]>
     </change-notes>

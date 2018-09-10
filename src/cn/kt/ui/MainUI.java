@@ -1,8 +1,8 @@
 package cn.kt.ui;
 
+import cn.kt.generate.Generate;
 import cn.kt.model.Config;
 import cn.kt.model.TableInfo;
-import cn.kt.generate.Generate;
 import cn.kt.setting.PersistentConfig;
 import cn.kt.util.JTextFieldHintListener;
 import cn.kt.util.StringUtils;
