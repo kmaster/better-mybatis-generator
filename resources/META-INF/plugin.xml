@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cn.kt.better.mybatis.generator.id</id>
     <name>better-mybatis-generator</name>
-    <version>1.4</version>
+    <version>1.5</version>
     <vendor email="396367775@qq.com" url="https://github.com/kmaster/better-mybatis-generator">kang tian</vendor>
 
     <description>
