@@ -113,7 +113,7 @@ public class UserUI extends JFrame {
                 if (driverClass.contains("oracle")) {
                     Class.forName(DbType.Oracle.getDriverClass());
                 } else if (driverClass.contains("mysql")) {
-                    address += "?useSSL=false";
+//                    address += "?useSSL=false";
                     if (driverClass.contains("cj")) {
                         //添加对mysql8的支持
                         Class.forName(DbType.MySQL_8.getDriverClass());
