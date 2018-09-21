@@ -71,6 +71,7 @@ public class Generate {
         url = connectionConfig.getUrl();
         if (driverClass.contains("mysql")) {
             DatabaseType = "MySQL";
+            driverClass = DbType.MySQL_8.getDriverClass();
         } else if (driverClass.contains("oracle")) {
             DatabaseType = "Oracle";
         } else if (driverClass.contains("postgresql")) {
@@ -79,6 +80,8 @@ public class Generate {
             DatabaseType = "SqlServer";
         } else if (driverClass.contains("sqlite")) {
             DatabaseType = "Sqlite";
+        }else if (driverClass.contains("mariadb")) {
+            DatabaseType = "MariaDB";
         }
 
         for (PsiElement psiElement : psiElements) {
@@ -198,6 +201,7 @@ public class Generate {
 
         JDBCConnectionConfiguration jdbcConfig = new JDBCConnectionConfiguration();
         jdbcConfig.addProperty("nullCatalogMeansCurrent", "true");
+//        jdbcConfig.setDriverClass("com.mysql.cj.jdbc.Driver");
         jdbcConfig.setDriverClass(driverClass);
         jdbcConfig.setConnectionURL(url);
 

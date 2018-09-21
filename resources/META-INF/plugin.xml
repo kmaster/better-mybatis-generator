@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cn.kt.better.mybatis.generator.id</id>
     <name>better-mybatis-generator</name>
-    <version>1.5.1</version>
+    <version>1.5.2</version>
     <vendor email="396367775@qq.com" url="https://github.com/kmaster/better-mybatis-generator">kang tian</vendor>
 
     <description>
@@ -18,7 +18,7 @@
    </ul>
 
    <ul>
-        <li>在idea的database工具中使用，右击选择一张或多张表生成mybatis相关的代码。目前已支持的数据库：Mysql、Oracle。待验证：Mysql8、PostgreSQL与SQL Server </li>
+        <li>在idea的database工具中使用，右击选择一张或多张表生成mybatis相关的代码。目前已支持的数据库：Mysql、Mysql8、Oracle、MariaDB。待验证：PostgreSQL与SQL Server </li>
         <li>Step1: 连接Database: <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>。</li>
         <li>Step2: 选择表（一或多张），右击选择功能 <kbd>mybatis generate</kbd> 打开主页面。</li>
         <li>Step3:检查配置无误后点击 <kbd>ok</kbd>。</li>
@@ -35,7 +35,10 @@
         <![CDATA[
    <ul>
        <li>v1.5<br/>
-            Support for the latest version.Optimize mysql8 database connection.
+            Support for IDEA the latest version.<br/>
+            Optimize Mysql8 database connection.<br/>
+            Add MariaDB support
+
         </li>
         <li>v1.4<br/>
             Fixed errors in oracle connection failures and code generation failures.
@@ -55,11 +58,8 @@
 
     <depends optional="true">com.intellij.database</depends>
     <extensions defaultExtensionNs="com.intellij">
-        <projectService serviceInterface="cn.kt.setting.PersistentConfig"
-                        serviceImplementation="cn.kt.setting.PersistentConfig"/>
-        <projectService serviceInterface="cn.kt.setting.DataConfig" serviceImplementation="cn.kt.setting.DataConfig"/>
-        <projectConfigurable groupId="tools" displayName="Mybatis generator plugin" id="gene.id"
-                             instance="cn.kt.setting.SettingConfigurable"/>
+        <projectService serviceInterface="cn.kt.setting.PersistentConfig" serviceImplementation="cn.kt.setting.PersistentConfig"/>
+        <projectConfigurable groupId="tools" displayName="Mybatis generator plugin" id="gene.id" instance="cn.kt.setting.SettingConfigurable"/>
     </extensions>
 
     <actions>

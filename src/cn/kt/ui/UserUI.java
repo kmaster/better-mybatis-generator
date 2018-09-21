@@ -113,19 +113,15 @@ public class UserUI extends JFrame {
                 if (driverClass.contains("oracle")) {
                     Class.forName(DbType.Oracle.getDriverClass());
                 } else if (driverClass.contains("mysql")) {
-//                    address += "?useSSL=false";
-                    if (driverClass.contains("cj")) {
-                        //添加对mysql8的支持
-                        Class.forName(DbType.MySQL_8.getDriverClass());
-                    } else {
-                        Class.forName(DbType.MySQL.getDriverClass());
-                    }
+                    Class.forName(DbType.MySQL_8.getDriverClass());
                 } else if (driverClass.contains("postgresql")) {
                     Class.forName(DbType.PostgreSQL.getDriverClass());
                 } else if (driverClass.contains("sqlserver")) {
                     Class.forName(DbType.SqlServer.getDriverClass());
                 } else if (driverClass.contains("sqlite")) {
                     Class.forName(DbType.Sqlite.getDriverClass());
+                } else if (driverClass.contains("mariadb")) {
+                    Class.forName(DbType.MariaDB.getDriverClass());
                 }
 
                 conn = DriverManager.getConnection(address, usernameField.getText(), passwordField.getText());
