@@ -32,3 +32,8 @@ Using sample screenshots：
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/8.png)<br>
 
 
+notice：
+-------
+1、set mysql8 time_zone | mysql8已经在url上添加?serverTimezone=UTC，如果仍不能连接，考虑设置数据库的时区（正式的生成库请谨慎设置）。<br>
+![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/修改mysql8时区.png)<br>
+
