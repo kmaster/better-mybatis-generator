@@ -1,5 +1,6 @@
 package cn.kt.ui;
 
+import cn.kt.model.Config;
 import cn.kt.model.DbType;
 import cn.kt.model.User;
 import cn.kt.setting.PersistentConfig;
@@ -32,7 +33,7 @@ public class UserUI extends JFrame {
     private AnActionEvent anActionEvent;
     private Project project;
     private PersistentConfig persistentConfig;
-
+    private Config config;
     private JPanel contentPanel = new JBPanel<>();
     private JPanel btnPanel = new JBPanel<>();
     private JPanel filedPanel = new JBPanel<>();
@@ -43,10 +44,11 @@ public class UserUI extends JFrame {
     public JTextField passwordField = new JBTextField(20);
 
 
-    public UserUI(String driverClass, String address, AnActionEvent anActionEvent) throws HeadlessException {
+    public UserUI(String driverClass, String address, AnActionEvent anActionEvent, Config config) throws HeadlessException {
         this.anActionEvent = anActionEvent;
         this.project = anActionEvent.getData(PlatformDataKeys.PROJECT);
         this.persistentConfig = PersistentConfig.getInstance(project);
+        this.config = config;
         setTitle("set username and password");
         setPreferredSize(new Dimension(400, 180));//设置大小
         setLocation(550, 350);
@@ -108,27 +110,41 @@ public class UserUI extends JFrame {
 
     private void onOK(String driverClass, String address, PersistentConfig persistentConfig, Project project) {
         try {
+            String originAddress = address;
             Connection conn = null;
+            String DbTypeName = "";
+            Boolean isMySQL_8 = config.isMysql_8();
             try {
                 if (driverClass.contains("oracle")) {
+                    DbTypeName = "oracle";
                     Class.forName(DbType.Oracle.getDriverClass());
                 } else if (driverClass.contains("mysql")) {
-                    Class.forName(DbType.MySQL_8.getDriverClass());
+                    DbTypeName = "mysql";
+                    if (!isMySQL_8) {
+                        Class.forName(DbType.MySQL.getDriverClass());
+                    } else {
+                        Class.forName(DbType.MySQL_8.getDriverClass());
+                        address += "?serverTimezone=UTC";
+                    }
                 } else if (driverClass.contains("postgresql")) {
+                    DbTypeName = "postgresql";
                     Class.forName(DbType.PostgreSQL.getDriverClass());
                 } else if (driverClass.contains("sqlserver")) {
+                    DbTypeName = "sqlserver";
                     Class.forName(DbType.SqlServer.getDriverClass());
                 } else if (driverClass.contains("sqlite")) {
+                    DbTypeName = "sqlite";
                     Class.forName(DbType.Sqlite.getDriverClass());
                 } else if (driverClass.contains("mariadb")) {
+                    DbTypeName = "mariadb";
                     Class.forName(DbType.MariaDB.getDriverClass());
                 }
 
                 conn = DriverManager.getConnection(address, usernameField.getText(), passwordField.getText());
 
             } catch (Exception ex) {
-                Messages.showMessageDialog(project, "User name or password error", "Testing database connection ", Messages.getInformationIcon());
-                new UserUI(driverClass, address, anActionEvent);
+                Messages.showMessageDialog(project, "Failed to connect to " + DbTypeName + " database,please check username and password,or mysql is version 8?", "Test connection", Messages.getInformationIcon());
+//                new UserUI(driverClass, address, anActionEvent, config);
                 return;
             } finally {
                 if (conn != null) {
@@ -141,8 +157,7 @@ public class UserUI extends JFrame {
             if (users == null) {
                 users = new HashMap<>();
             }
-
-            users.put(address, new User(usernameField.getText()));
+            users.put(originAddress, new User(usernameField.getText()));
             CredentialAttributes attributes = new CredentialAttributes("better-mybatis-generator-" + address, usernameField.getText(), this.getClass(), false);
             Credentials saveCredentials = new Credentials(attributes.getUserName(), passwordField.getText());
             PasswordSafe.getInstance().set(attributes, saveCredentials);

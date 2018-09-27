@@ -3,9 +3,12 @@ package cn.kt.ui;
 import cn.kt.generate.Generate;
 import cn.kt.model.Config;
 import cn.kt.model.TableInfo;
+import cn.kt.model.User;
 import cn.kt.setting.PersistentConfig;
 import cn.kt.util.JTextFieldHintListener;
 import cn.kt.util.StringUtils;
+import com.intellij.database.model.RawConnectionConfig;
+import com.intellij.database.psi.DbDataSource;
 import com.intellij.database.psi.DbTable;
 import com.intellij.ide.util.PackageChooserDialog;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -79,12 +82,20 @@ public class MainUI extends JFrame {
     private JCheckBox useActualColumnNamesBox = new JCheckBox("Actual-Column(实际的列名)");
     private JCheckBox useTableNameAliasBox = new JCheckBox("Use-Alias(启用别名查询)");
     private JCheckBox useExampleBox = new JCheckBox("Use-Example");
+    private JCheckBox mysql_8Box = new JCheckBox("mysql_8");
+
+
 
     public MainUI(AnActionEvent anActionEvent) throws HeadlessException {
         this.anActionEvent = anActionEvent;
         this.project = anActionEvent.getData(PlatformDataKeys.PROJECT);
         this.persistentConfig = PersistentConfig.getInstance(project);
         this.psiElements = anActionEvent.getData(LangDataKeys.PSI_ELEMENT_ARRAY);
+
+        initConfigMap = persistentConfig.getInitConfig();
+        historyConfigList = persistentConfig.getHistoryConfigList();
+
+
 
         setTitle("mybatis generate tool");
         setPreferredSize(new Dimension(1200, 700));//设置大小
@@ -104,8 +115,7 @@ public class MainUI extends JFrame {
         }
         String projectFolder = project.getBasePath();
 
-        initConfigMap = persistentConfig.getInitConfig();
-        historyConfigList = persistentConfig.getHistoryConfigList();
+
 
         if (psiElements.length > 1) {//多表时，只使用默认配置
             if (initConfigMap != null) {
@@ -326,7 +336,7 @@ public class MainUI extends JFrame {
 
         JPanel xmlFolderPanel = new JPanel();
         xmlFolderPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        xmlFolderPanel.add(new JLabel("xml      folder:"));
+        xmlFolderPanel.add(new JLabel("xml     folder:"));
 
         xmlFolderBtn.setTextFieldPreferredWidth(45);
         if (config != null && !StringUtils.isEmpty(config.getXmlTargetFolder())) {
@@ -353,6 +363,7 @@ public class MainUI extends JFrame {
             needToStringHashcodeEqualsBox.setSelected(true);
             useSchemaPrefixBox.setSelected(true);
             useExampleBox.setSelected(true);
+
         } else {
             if (config.isOffsetLimit()) {
                 offsetLimitBox.setSelected(true);
@@ -394,6 +405,9 @@ public class MainUI extends JFrame {
             if (config.isUseExample()) {
                 useExampleBox.setSelected(true);
             }
+            if (config.isMysql_8()) {
+                mysql_8Box.setSelected(true);
+            }
         }
 
 
@@ -413,6 +427,7 @@ public class MainUI extends JFrame {
         paneMainDown.add(useActualColumnNamesBox);
         paneMainDown.add(useTableNameAliasBox);
         paneMainDown.add(useExampleBox);
+        paneMainDown.add(mysql_8Box);
 
         paneMain.add(paneMainTop);
         paneMain.add(paneMainDown);
@@ -475,6 +490,7 @@ public class MainUI extends JFrame {
                 useActualColumnNamesBox.setSelected(selectedConfig.isUseActualColumnNames());
                 useTableNameAliasBox.setSelected(selectedConfig.isUseTableNameAlias());
                 useExampleBox.setSelected(selectedConfig.isUseExample());
+                mysql_8Box.setSelected(selectedConfig.isMysql_8());
 
             }
         });
@@ -563,6 +579,7 @@ public class MainUI extends JFrame {
                 generator_config.setUseActualColumnNames(useActualColumnNamesBox.getSelectedObjects() != null);
                 generator_config.setUseTableNameAlias(useTableNameAliasBox.getSelectedObjects() != null);
                 generator_config.setUseExample(useExampleBox.getSelectedObjects() != null);
+                generator_config.setMysql_8(mysql_8Box.getSelectedObjects() != null);
 
                 generator_config.setModelMvnPath(modelMvnField.getText());
                 generator_config.setDaoMvnPath(daoMvnField.getText());
@@ -612,6 +629,7 @@ public class MainUI extends JFrame {
                     generator_config.setUseActualColumnNames(useActualColumnNamesBox.getSelectedObjects() != null);
                     generator_config.setUseTableNameAlias(useTableNameAliasBox.getSelectedObjects() != null);
                     generator_config.setUseExample(useExampleBox.getSelectedObjects() != null);
+                    generator_config.setMysql_8(mysql_8Box.getSelectedObjects() != null);
 
                     generator_config.setModelMvnPath(modelMvnField.getText());
                     generator_config.setDaoMvnPath(daoMvnField.getText());

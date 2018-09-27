@@ -116,6 +116,10 @@ public class Config {
 	 * 是否使用Example
 	 */
 	private boolean useExample;
+	/**
+	 * 是否是mysql8数据库
+	 */
+	private boolean mysql_8;
 
 	private String encoding;
 	private String connectorJarPath;
@@ -370,5 +374,13 @@ public class Config {
 
 	public void setDaoPostfix(String daoPostfix) {
 		this.daoPostfix = daoPostfix;
+	}
+
+	public boolean isMysql_8() {
+		return mysql_8;
+	}
+
+	public void setMysql_8(boolean mysql_8) {
+		this.mysql_8 = mysql_8;
 	}
 }

@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cn.kt.better.mybatis.generator.id</id>
     <name>better-mybatis-generator</name>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
     <vendor email="396367775@qq.com" url="https://github.com/kmaster/better-mybatis-generator">kang tian</vendor>
 
     <description>
@@ -18,14 +18,14 @@
    </ul>
 
    <ul>
-        <li>在idea的database工具中使用，右击选择一张或多张表生成mybatis相关的代码。目前已支持的数据库：Mysql、Mysql8、Oracle、MariaDB。待验证：PostgreSQL与SQL Server </li>
+        <li>在idea的database工具中使用，右击选择一张或多张表生成mybatis相关的代码。目前已支持的数据库：Mysql、Mysql8(可能需要设置数据库时区time_zone = '+8:00')、Oracle、MariaDB。待验证：PostgreSQL与SQL Server </li>
         <li>Step1: 连接Database: <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>。</li>
         <li>Step2: 选择表（一或多张），右击选择功能 <kbd>mybatis generate</kbd> 打开主页面。</li>
         <li>Step3:检查配置无误后点击 <kbd>ok</kbd>。</li>
         <li>Step4: 首次使用时请提供账号密码。</li>
         <li>Step5: 生成完成，检查、使用代码。</li>
    <li>Setting: <kbd>Tools</kbd> > <kbd>MyBatis generator Plugin</kbd> 此处设置默认配置，未设置则使用程序默认配置。</li>
-   <li>更多的说明和使用截图： <a href="https://github.com/kmaster/better-mybatis-generator/blob/master/README.md">使用示例</a></li>
+   <li>更多的插件使用截图和注意事项见： <a href="https://github.com/kmaster/better-mybatis-generator/blob/master/README.md">插件使用介绍</a></li>
    </ul>
     ]]>
 
@@ -38,7 +38,6 @@
             Support for IDEA the latest version.<br/>
             Optimize Mysql8 database connection.<br/>
             Add MariaDB support
-
         </li>
         <li>v1.4<br/>
             Fixed errors in oracle connection failures and code generation failures.

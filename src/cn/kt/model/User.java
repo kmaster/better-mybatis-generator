@@ -5,6 +5,8 @@ package cn.kt.model;
  * Created by kangtian on 2018/8/3.
  */
 public class User {
+
+    //用户名
     private String username;
 
 
@@ -17,6 +19,7 @@ public class User {
     }
 
 
+
     public String getUsername() {
         return username;
     }
@@ -24,4 +27,6 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+
 }

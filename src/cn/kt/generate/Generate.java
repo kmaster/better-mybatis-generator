@@ -40,8 +40,8 @@ public class Generate {
     private Config config;//界面默认配置
     private String username;
     private String DatabaseType;//数据库类型
-    private String driverClass;//数据库类型
-    private String url;//数据库类型
+    private String driverClass;//数据库驱动
+    private String url;//数据库连接url
 
     public Generate(Config config) {
         this.config = config;
@@ -71,7 +71,6 @@ public class Generate {
         url = connectionConfig.getUrl();
         if (driverClass.contains("mysql")) {
             DatabaseType = "MySQL";
-            driverClass = DbType.MySQL_8.getDriverClass();
         } else if (driverClass.contains("oracle")) {
             DatabaseType = "Oracle";
         } else if (driverClass.contains("postgresql")) {
@@ -127,7 +126,7 @@ public class Generate {
             try {
                 myBatisGenerator.generate(new GeneratorCallback(), contexts, fullyqualifiedTables);
             } catch (Exception e) {
-                Messages.showMessageDialog(e.getMessage(), "Generate failure", Messages.getInformationIcon()
+                Messages.showMessageDialog(e.getMessage()+" if use mysql,check version8?", "Generate failure", Messages.getInformationIcon()
                 );
             }
             VirtualFile baseDir = project.getBaseDir();
@@ -201,23 +200,33 @@ public class Generate {
 
         JDBCConnectionConfiguration jdbcConfig = new JDBCConnectionConfiguration();
         jdbcConfig.addProperty("nullCatalogMeansCurrent", "true");
-//        jdbcConfig.setDriverClass("com.mysql.cj.jdbc.Driver");
-        jdbcConfig.setDriverClass(driverClass);
-        jdbcConfig.setConnectionURL(url);
+
 
         Map<String, User> users = persistentConfig.getUsers();
         if (users != null && users.containsKey(url)) {
             User user = users.get(url);
 
             username = user.getUsername();
+
             CredentialAttributes attributes_get = new CredentialAttributes("better-mybatis-generator-" + url, username, this.getClass(), false);
             String password = PasswordSafe.getInstance().getPassword(attributes_get);
 
             jdbcConfig.setUserId(username);
             jdbcConfig.setPassword(password);
+
+            Boolean mySQL_8 = config.isMysql_8();
+            if (mySQL_8) {
+                driverClass = DbType.MySQL_8.getDriverClass();
+                url += "?serverTimezone=UTC&useSSL=false";
+            } else {
+                url += "?useSSL=false";
+            }
+
+            jdbcConfig.setDriverClass(driverClass);
+            jdbcConfig.setConnectionURL(url);
             return jdbcConfig;
         } else {
-            UserUI userUI = new UserUI(driverClass, url, anActionEvent);
+            UserUI userUI = new UserUI(driverClass, url, anActionEvent,config);
             return null;
         }
 
