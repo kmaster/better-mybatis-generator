@@ -34,6 +34,8 @@ Using sample screenshots：
 
 notice：
 -------
-1、set mysql8 time_zone | mysql8已经在url上添加?serverTimezone=UTC，如果仍不能连接，考虑设置数据库的时区（正式的生成库请谨慎设置）。<br>
+1、If your database is mysql8,please select mysql8 option |数据库是mysql8，需要单独勾选上mysql8选项。<br>
+![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/mysql选项.png)<br>
+2、If you can't connect to the database with selected option, then set mysql8 time_zone as follows | mysql8已经在url上添加?serverTimezone=UTC，如果仍不能连接，考虑设置数据库的时区（正式的生成库请谨慎设置）。<br>
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/修改mysql8时区.png)<br>
 
