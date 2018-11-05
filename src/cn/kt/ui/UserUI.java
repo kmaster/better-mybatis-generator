@@ -124,7 +124,7 @@ public class UserUI extends JFrame {
                         Class.forName(DbType.MySQL.getDriverClass());
                     } else {
                         Class.forName(DbType.MySQL_8.getDriverClass());
-                        address += "?serverTimezone=UTC";
+                        address += "?serverTimezone=GMT";
                     }
                 } else if (driverClass.contains("postgresql")) {
                     DbTypeName = "postgresql";
@@ -143,7 +143,7 @@ public class UserUI extends JFrame {
                 conn = DriverManager.getConnection(address, usernameField.getText(), passwordField.getText());
 
             } catch (Exception ex) {
-                Messages.showMessageDialog(project, "Failed to connect to " + DbTypeName + " database,please check username and password,or mysql is version 8?", "Test connection", Messages.getInformationIcon());
+                Messages.showMessageDialog(project, "Failed to connect to " + DbTypeName + " database,please check username and password,or mysql is version 8?" + isMySQL_8, "Test connection", Messages.getInformationIcon());
 //                new UserUI(driverClass, address, anActionEvent, config);
                 return;
             } finally {
