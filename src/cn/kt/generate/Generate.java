@@ -217,9 +217,7 @@ public class Generate {
             Boolean mySQL_8 = config.isMysql_8();
             if (mySQL_8) {
                 driverClass = DbType.MySQL_8.getDriverClass();
-                url += "?serverTimezone=UTC&useSSL=false";
-            } else {
-                url += "?useSSL=false";
+//                url += "?serverTimezone=GMT&useSSL=false";//已改成在URL上添加参数 2018年11月9日10:18:39
             }
 
             jdbcConfig.setDriverClass(driverClass);

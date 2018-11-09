@@ -124,7 +124,6 @@ public class UserUI extends JFrame {
                         Class.forName(DbType.MySQL.getDriverClass());
                     } else {
                         Class.forName(DbType.MySQL_8.getDriverClass());
-                        address += "?serverTimezone=GMT";
                     }
                 } else if (driverClass.contains("postgresql")) {
                     DbTypeName = "postgresql";

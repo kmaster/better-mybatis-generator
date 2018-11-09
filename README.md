@@ -36,6 +36,6 @@ notice：
 -------
 1、If your database is mysql8,please select mysql8 option |数据库是mysql8，需要单独勾选上mysql8选项。<br>
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/mysql选项.png)<br>
-2、If you can't connect to the database with selected option, then set mysql8 time_zone as follows | mysql8已经在url上添加?serverTimezone=UTC，如果仍不能连接，考虑设置数据库的时区（正式的生成库请谨慎设置）。<br>
-![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/修改mysql8时区.png)<br>
+2、When connecting mysql8,add  '?serverTimezone=GMT' or '?serverTimezone=UTC'  at URL, Recommended Use '?serverTimezone=GMT'. | 之前在代码中默认使用?serverTimezone=UTC，但有不能使用的情况。现改成在URL上自定义，推荐使用'?serverTimezone=GMT'。<br>
+![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/mysql8-config.png)<br>
 

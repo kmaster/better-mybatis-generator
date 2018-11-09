@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>cn.kt.better.mybatis.generator.id</id>
     <name>better-mybatis-generator</name>
-    <version>1.5.3</version>
+    <version>1.5.4</version>
     <vendor email="396367775@qq.com" url="https://github.com/kmaster/better-mybatis-generator">kang tian</vendor>
 
     <description>
@@ -26,6 +26,7 @@
         <li>Step5: 生成完成，检查、使用代码。</li>
    <li>Setting: <kbd>Tools</kbd> > <kbd>MyBatis generator Plugin</kbd> 此处设置默认配置，未设置则使用程序默认配置。</li>
    <li>更多的插件使用截图和注意事项见： <a href="https://github.com/kmaster/better-mybatis-generator/blob/master/README.md">插件使用介绍</a></li>
+   <li>Download the [latest release]： <a href="https://plugins.jetbrains.com/plugin/11021-better-mybatis-generator">idea plugin官网地址</a></li>
    </ul>
     ]]>
 
@@ -34,6 +35,9 @@
     <change-notes>
         <![CDATA[
    <ul>
+       <li>v1.5.4<br/>
+            When connecting mysql8,add  '?serverTimezone=GMT'  at URL.
+        </li>
        <li>v1.5<br/>
             Support for IDEA the latest version.<br/>
             Optimize Mysql8 database connection.<br/>
