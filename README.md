@@ -40,7 +40,7 @@ Using sample screenshots：
 #2、修改sdk
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/修改插件sdk.png)<br>
 #3、运行配置无误则直接run/debug。若因idea版本导致提供的配置不对，请考虑本地创建空的插件工程然后参考其配置。<br>
-![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/修改插件sdk.png)<br>
+![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/run.png)<br>
 
 注意事项 | notice：
 -------
