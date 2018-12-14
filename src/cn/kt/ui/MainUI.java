@@ -20,6 +20,7 @@ import com.intellij.psi.PsiPackage;
 import com.intellij.ui.components.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
@@ -439,6 +440,10 @@ public class MainUI extends JFrame {
         panelLeft.setLayout(new BoxLayout(panelLeft, BoxLayout.Y_AXIS));
         this.getContentPane().add(Box.createVerticalStrut(10)); //采用x布局时，添加固定宽度组件隔开
         final DefaultListModel defaultListModel = new DefaultListModel();
+
+        Border historyBorder = BorderFactory.createTitledBorder("history config:");
+        panelLeft.setBorder(historyBorder);
+
 
         if (historyConfigList == null) {
             historyConfigList = new HashMap<>();
