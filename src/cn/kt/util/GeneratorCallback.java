@@ -1,6 +1,5 @@
 package cn.kt.util;
 
-import com.intellij.openapi.ui.Messages;
 import org.mybatis.generator.api.ProgressCallback;
 
 /**
@@ -29,7 +28,6 @@ public class GeneratorCallback implements ProgressCallback {
 
     @Override
     public void done() {
-        Messages.showMessageDialog("Generate finish", "Generate progress", Messages.getInformationIcon());
     }
 
     @Override

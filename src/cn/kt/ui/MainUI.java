@@ -3,12 +3,9 @@ package cn.kt.ui;
 import cn.kt.generate.Generate;
 import cn.kt.model.Config;
 import cn.kt.model.TableInfo;
-import cn.kt.model.User;
 import cn.kt.setting.PersistentConfig;
 import cn.kt.util.JTextFieldHintListener;
 import cn.kt.util.StringUtils;
-import com.intellij.database.model.RawConnectionConfig;
-import com.intellij.database.psi.DbDataSource;
 import com.intellij.database.psi.DbTable;
 import com.intellij.ide.util.PackageChooserDialog;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -114,7 +111,6 @@ public class MainUI extends JFrame {
             primaryKey = tableInfo.getPrimaryKeys().get(0);
         }
         String projectFolder = project.getBasePath();
-
 
 
         if (psiElements.length > 1) {//多表时，只使用默认配置
@@ -550,6 +546,8 @@ public class MainUI extends JFrame {
 
     private void onOK() {
         try {
+            dispose();
+
             if (psiElements.length == 1) {
                 Config generator_config = new Config();
                 generator_config.setName(tableNameField.getText());

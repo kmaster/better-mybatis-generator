@@ -1,12 +1,14 @@
 package cn.kt.model;
 
-import com.google.common.collect.Lists;
 import com.intellij.database.model.DasColumn;
 import com.intellij.database.psi.DbTable;
 import com.intellij.database.util.DasUtil;
 import com.intellij.util.containers.JBIterable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class TableInfo {
 
@@ -44,7 +46,7 @@ public class TableInfo {
     }
 
     public List<String> getColumnsName() {
-        List<String> columnsName = Lists.newArrayList();
+        List<String> columnsName = new ArrayList();
         for (DasColumn column : columns) {
             columnsName.add(column.getName());
         }
