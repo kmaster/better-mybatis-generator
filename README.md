@@ -1,7 +1,7 @@
 better-mybatis-generator idea plugin
 ====
-插件功能：在idea的database工具中使用，选择表（一或n,建议n小于10），生成mybatis相关的代码，(包括:dao、example、domain、xml)<br>。
-Use in idea database tool，right click table(one or more) to generate mybatis files (include:dao、example、domain、xml)<br>
+插件功能：在idea的database工具中使用，选择表（一或n,建议n小于10），生成mybatis相关的代码，(包括:dao、example、domain、xml)。<br>
+Use in idea database tool，right click table(one or more) to generate mybatis files (include:dao、example、domain、xml).<br>
 
 Plugin Installation：
 -------
@@ -35,11 +35,11 @@ Using sample screenshots：
 
 如何在本地运行/调试此插件 | How to run/debug plugin ：
 -------
-#1、创建工程  File -> New -> Project from Version Control -> Git  填写github地址：https://github.com/kmaster/better-mybatis-generator.git
+#1、创建工程  File -> New -> Project from Version Control -> Git  填写github地址：https://github.com/kmaster/better-mybatis-generator.git<br>
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/从github创建工程.png)<br>
 #2、修改sdk
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/修改插件sdk.png)<br>
-#3、运行配置无误则直接run/debug。若因idea版本导致提供的配置不对，请考虑本地创建空的插件工程然后参考其配置。
+#3、运行配置无误则直接run/debug。若因idea版本导致提供的配置不对，请考虑本地创建空的插件工程然后参考其配置。<br>
 ![image](https://github.com/kmaster/better-mybatis-generator/blob/master/image/修改插件sdk.png)<br>
 
 注意事项 | notice：
