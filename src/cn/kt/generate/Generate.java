@@ -227,6 +227,10 @@ public class Generate {
 
             CredentialAttributes attributes_get = new CredentialAttributes("better-mybatis-generator-" + url, username, this.getClass(), false);
             String password = PasswordSafe.getInstance().getPassword(attributes_get);
+            if (StringUtils.isEmpty(password)) {
+                new UserUI(driverClass, url, anActionEvent, config);
+                return null;
+            }
 
             jdbcConfig.setUserId(username);
             jdbcConfig.setPassword(password);
