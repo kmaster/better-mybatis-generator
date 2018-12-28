@@ -221,6 +221,7 @@ public class MainUI extends JFrame {
             final PsiPackage psiPackage = chooser.getSelectedPackage();
             String packageName = psiPackage == null ? null : psiPackage.getQualifiedName();
             modelPackageField.setText(packageName);
+            MainUI.this.toFront();
         });
         modelPackagePanel.add(packageBtn1);
 
@@ -246,6 +247,7 @@ public class MainUI extends JFrame {
             final PsiPackage psiPackage = chooser.getSelectedPackage();
             String packageName = psiPackage == null ? null : psiPackage.getQualifiedName();
             daoPackageField.setText(packageName);
+            MainUI.this.toFront();
         });
         daoPackagePanel.add(packageBtn2);
 
