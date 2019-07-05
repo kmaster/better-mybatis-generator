@@ -44,8 +44,8 @@ public class MainUI extends JFrame {
 
 
     private JPanel contentPane = new JBPanel<>();
-    private JButton buttonOK = new JButton("ok");
-    private JButton buttonCancel = new JButton("cancle");
+    private JButton buttonOK = new JButton("OK");
+    private JButton buttonCancel = new JButton("Cancel");
     private JButton selectConfigBtn = new JButton("SELECT");
     private JButton deleteConfigBtn = new JButton("DELETE");
 
@@ -68,7 +68,7 @@ public class MainUI extends JFrame {
     private JButton setProjectBtn = new JButton("Set-Project-Path");
 
     private JCheckBox offsetLimitBox = new JCheckBox("Page(分页)");
-    private JCheckBox commentBox = new JCheckBox("comment(实体注释)");
+    private JCheckBox commentBox = new JCheckBox("Comment(实体注释)");
     private JCheckBox overrideXMLBox = new JCheckBox("Overwrite-Xml");
     private JCheckBox needToStringHashcodeEqualsBox = new JCheckBox("toString/hashCode/equals");
     private JCheckBox useSchemaPrefixBox = new JCheckBox("Use-Schema(使用Schema前缀)");
@@ -80,7 +80,7 @@ public class MainUI extends JFrame {
     private JCheckBox useActualColumnNamesBox = new JCheckBox("Actual-Column(实际的列名)");
     private JCheckBox useTableNameAliasBox = new JCheckBox("Use-Alias(启用别名查询)");
     private JCheckBox useExampleBox = new JCheckBox("Use-Example");
-    private JCheckBox mysql_8Box = new JCheckBox("mysql_8");
+    private JCheckBox mysql_8Box = new JCheckBox("MySQL_8");
 
 
 

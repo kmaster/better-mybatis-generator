@@ -37,8 +37,8 @@ public class UserUI extends JFrame {
     private JPanel contentPanel = new JBPanel<>();
     private JPanel btnPanel = new JBPanel<>();
     private JPanel filedPanel = new JBPanel<>();
-    private JButton buttonOK = new JButton("ok");
-    private JButton buttonCancel = new JButton("cancle");
+    private JButton buttonOK = new JButton("OK");
+    private JButton buttonCancel = new JButton("Cancel");
 
     public JTextField usernameField = new JBTextField(20);
     public JTextField passwordField = new JBTextField(20);
